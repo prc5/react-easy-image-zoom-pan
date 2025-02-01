@@ -260,9 +260,10 @@ export class ZoomPanPinch {
     event.preventDefault();
     event.stopPropagation();
 
+    const shiftPressed = event.shiftKey;
     const { positionX, positionY } = this.transformState;
-    const mouseX = positionX - event.deltaX;
-    const mouseY = positionY - event.deltaY;
+    const mouseX = positionX - (shiftPressed ? event.deltaY : event.deltaX);
+    const mouseY = positionY - (shiftPressed ? event.deltaX : event.deltaY);
     const newPositionX = panning.lockAxisX ? positionX : mouseX;
     const newPositionY = panning.lockAxisY ? positionY : mouseY;
 
