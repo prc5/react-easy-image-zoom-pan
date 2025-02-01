@@ -44,11 +44,11 @@ export const getBounds = (
 ): BoundsType => {
   const scaleWidthFactor =
     wrapperWidth > newContentWidth
-      ? diffWidth * (centerZoomedOut ? 1 : 0.5)
+      ? diffWidth * (centerZoomedOut ? 0.5 : 1)
       : 0;
   const scaleHeightFactor =
     wrapperHeight > newContentHeight
-      ? diffHeight * (centerZoomedOut ? 1 : 0.5)
+      ? diffHeight * (centerZoomedOut ? 0.5 : 1)
       : 0;
 
   const minPositionX = wrapperWidth - newContentWidth - scaleWidthFactor;

@@ -55,8 +55,13 @@ export const handlePinchZoom = (
   const { contentComponent, pinchStartDistance, wrapperComponent } =
     contextInstance;
   const { scale } = contextInstance.transformState;
-  const { limitToBounds, centerZoomedOut, zoomAnimation, alignmentAnimation } =
-    contextInstance.setup;
+  const {
+    alignmentAnimation,
+    centerZoomedOut,
+    disablePadding,
+    limitToBounds,
+    zoomAnimation,
+  } = contextInstance.setup;
   const { disabled, size } = zoomAnimation;
 
   // if one finger starts from outside of wrapper
@@ -82,7 +87,13 @@ export const handlePinchZoom = (
 
   const bounds = handleCalculateBounds(contextInstance, newScale);
 
-  const isPaddingDisabled = disabled || size === 0 || centerZoomedOut;
+  const isPaddingDisabled =
+    disabled ||
+    size === 0 ||
+    disablePadding ||
+    centerZoomedOut ||
+    bounds.maxPositionX === 0 ||
+    bounds.maxPositionY === 0;
   const isLimitedToBounds = limitToBounds && isPaddingDisabled;
 
   const { x, y } = handleCalculateZoomPositions(
